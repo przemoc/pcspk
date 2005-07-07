@@ -1,0 +1,8 @@
+#!/bin/sh
+
+# Example of how to use freq2beep
+# Copyright (C) 2005 Przemoc <przemoc@gmail.com>
+
+MELODY="300:50 300:50 350:60 200:60 400:70 100:70 450:80 200:80 500:90 300:90 550 400 600:110 700 500 800 400 950 1000:150"
+
+echo "$MELODY" | freq2beep

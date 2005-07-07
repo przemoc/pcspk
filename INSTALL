@@ -1,0 +1,17 @@
+Set ip, port in Makefile for pc-speaker server to listen on.
+There are other options you can change freely.
+
+If you have beep from http://www.johnath.com/beep/ then set proper BEEPDIR
+and run
+
+ make
+ su
+ make install
+ 
+Otherwise you must download beep.c before, compile and install in BEEPDIR.
+If you don't need man pages for it etc. simplest way to do this is run
+
+ make beep-all
+
+There is also rc.pcspk generated, which you should add to system startup file
+(f.e. in Slackware it is /etc/rc.d/rc.local)

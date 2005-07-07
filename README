@@ -1,0 +1,58 @@
+/-----------------------------------------------------------------------------\
+| PCSpk - PC-Speaker Server & Clients                                         |
+|  version: 0.0.1 - draft                                                     |
+\-----------------------by Przemys³aw 'przemoc' Pawe³czyk <przemoc@gmail.com>-/
+
+/-------------\
+| Description |
+
+PCSpk is a set of command-line applications-clients for playing simple sounds,
+mellodies using pc-speaker by any user with netcat server based on great
+Johnathan Nightingale's beep (http://www.johnath.com/beep/).
+
+/----------------\
+| Implementation |
+
+Dirty, awful, insecure, etc. but it works.
+Using Johnathan Nightingale's beep, based on netcat and small C progs.
+
+/---------------\
+| Documentation |
+
+beep - go to http://www.johnath.com/beep/
+freq2beep & note2beep - reads from stdin
+
+- freq2beep
+space seperated values f[:l], where:
+f is integer - frequency (in Hz)
+l is integer - length (in ms), default: 100
+
+- note2beep
+first 3-digit number is integer - tempo (bpm)
+next are space seperated values TOL, where:
+T is letter - tone: C,d(des),D,e(es),E,F,g(ges),G,a(as),A,B,H,P(pause)
+O is digit - octave: 0-9
+L is digit/letter - length: L=0-9,A-Z <=> 1/(L+1)
+
+/--------------\
+| Requirements |
+
+Great Johnathan Nightingale's beep, that beeps the PC speaker with control of
+frequency, duration, repetitions, etc. (http://www.johnath.com/beep/)
+
+/-------------------\
+| Examples of usage |
+
+fuga - J.S.Bach fugue in D minor (fragment)
+fuga2 - J.S.Bach fugue in D minor (longer fragment)
+cosmic - wtf? ;-)
+
+/--------------\
+| Installation |
+
+See INSTALL file.
+
+/-----------\
+| ChangeLog |
+
+See ChangeLog file.
