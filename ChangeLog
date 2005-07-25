@@ -1,4 +1,12 @@
 /-------\
+| 0.0.2 |
+
+- netcat replaced by daemon pcspkd - PC-Speaker Server
+- note2beep & freq2beep are now only front-ends to pcspk - pc-speaker client
+- cleanups & some fixes (code & Makefile)
+- added ToDo list
+
+/-------\
 | 0.0.1 |
 
 - initial release

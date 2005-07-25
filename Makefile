@@ -1,54 +1,71 @@
-BEEPDIR=/usr/local/sbin
-PREFIX=/usr/local
-IP=127.0.0.1
+HOSTNAME=127.0.0.1
 PORT=11111
+PREFIX=/usr/local
+BEEPDIR=${PREFIX}/sbin
 
 CC=gcc
-DEFINES=-DIP=\"${IP}\" -DPORT=${PORT}
+CP=cp
+RM=rm
+SED=sed
+CHMOD=chmod
+GET=wget
 
 default : compile
 beep-all : beep-download beep beep-install
 beep-remove : beep-clean beep-delete
+install : install-core install-examples
 all : compile install
 world : beep-all all
+uninstall : uninstall-core uninstall-examples
 
 beep-download :
-	wget http://www.johnath.com/beep/beep.c
+	${GET} http://www.johnath.com/beep/beep.c
 
 beep-delete : 
-	rm beep.c
+	${RM} beep.c
 
 beep :
 	${CC} ${CFLAGS} beep.c -o beep
 
 beep-clean : 
-	rm beep
+	${RM} beep
 
 beep-install :
-	cp beep ${BEEPDIR}/
+	${CP} beep ${BEEPDIR}/
 
 beep-uninstall :
-	rm ${BEEPDIR}/beep
+	${RM} ${BEEPDIR}/beep
 
 compile :
-	${CC} ${CFLAGS} ${DEFINES} freq2beep.c -o freq2beep
-	${CC} ${CFLAGS} ${DEFINES} note2beep.c -o note2beep -lm 
-	sed "s|IP|${IP}|;s|PORT|${PORT}|;s|BEEPDIR|${BEEPDIR}|" rc.pcspk.template > rc.pcspk
-	chmod 700 rc.pcspk
+	${CC} ${CFLAGS} pcspkd.c -o pcspkd
+	${CC} ${CFLAGS} pcspk.c -o pcspk -lm 
+	${SED} "s|PREFIX|${PREFIX}|;s|HOSTNAME|${HOSTNAME}|;s|PORT|${PORT}|" rc.pcspkd.template > rc.pcspkd
+	${SED} "s|PREFIX|${PREFIX}|;s|HOSTNAME|${HOSTNAME}|;s|PORT|${PORT}|" freq2beep.template > freq2beep
+	${SED} "s|PREFIX|${PREFIX}|;s|HOSTNAME|${HOSTNAME}|;s|PORT|${PORT}|" note2beep.template > note2beep
+	${CHMOD} 700 rc.pcspkd
+	${CHMOD} 755 freq2beep note2beep
 
 clean : 
-	rm freq2beep note2beep rc.pcspk
+	${RM} pcspkd pcspk rc.pcspkd freq2beep note2beep
 
-install : 
-	cp freq2beep ${PREFIX}/bin/
-	cp note2beep ${PREFIX}/bin/
-	cp fuga ${PREFIX}/bin/
-	cp fuga2 ${PREFIX}/bin/
-	cp cosmic ${PREFIX}/bin/
+install-core : 
+	${CP} pcspkd ${PREFIX}/sbin/
+	${CP} pcspk ${PREFIX}/bin/
 
-uninstall :
-	rm ${PREFIX}/freq2beep
-	rm ${PREFIX}/note2beep
-	rm ${PREFIX}/fuga
-	rm ${PREFIX}/fuga2
-	rm ${PREFIX}/cosmic
+install-examples : 
+	${CP} freq2beep ${PREFIX}/bin/
+	${CP} note2beep ${PREFIX}/bin/
+	${CP} fuga ${PREFIX}/bin/
+	${CP} fuga2 ${PREFIX}/bin/
+	${CP} cosmic ${PREFIX}/bin/
+
+uninstall-core :
+	${RM} ${PREFIX}/sbin/pcspkd
+	${RM} ${PREFIX}/bin/pcspkd
+
+uninstall-examples :
+	${RM} ${PREFIX}/bin/freq2beep
+	${RM} ${PREFIX}/bin/note2beep
+	${RM} ${PREFIX}/bin/fuga
+	${RM} ${PREFIX}/bin/fuga2
+	${RM} ${PREFIX}/bin/cosmic

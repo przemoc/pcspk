@@ -1,0 +1,31 @@
+#!/bin/sh
+
+# Copyright (C) 2005 Przemoc <przemoc@gmail.com>
+
+pcspkd_start() {
+    PREFIX/sbin/pcspkd "HOSTNAME" "PORT"
+}
+
+pcspkd_stop() {
+    killall pcspkd
+}
+
+pcspkd_restart() {
+    pcspkd_stop
+    sleep 1
+    pcspkd_start
+}
+
+case "$1" in
+'start')
+    pcspkd_start
+    ;;
+'stop')
+    pcspkd_stop
+    ;;
+'restart')
+    pcspkd_restart
+    ;;
+*)
+    echo "usage $0 start|stop|restart"
+esac

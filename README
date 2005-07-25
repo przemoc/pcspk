@@ -1,25 +1,21 @@
 /-----------------------------------------------------------------------------\
-| PCSpk - PC-Speaker Server & Clients                                         |
-|  version: 0.0.1 - draft                                                     |
-\-----------------------by Przemys³aw 'przemoc' Pawe³czyk <przemoc@gmail.com>-/
+| PCSpk - PC-Speaker Server & Client                                          |
+|  version: 0.0.2                                                             |
+\-----------------------by Przemys³aw 'Przemoc' Pawe³czyk <przemoc@gmail.com>-/
 
 /-------------\
 | Description |
 
-PCSpk is a set of command-line applications-clients for playing simple sounds,
-mellodies using pc-speaker by any user with netcat server based on great
-Johnathan Nightingale's beep (http://www.johnath.com/beep/).
-
-/----------------\
-| Implementation |
-
-Dirty, awful, insecure, etc. but it works.
-Using Johnathan Nightingale's beep, based on netcat and small C progs.
+PCSpk is a set of command line applications for playing simple sounds and
+melodies using the PC speaker. It is based on great Johnathan Nightingale's
+beep (http://www.johnath.com/beep/).
 
 /---------------\
 | Documentation |
 
 beep - go to http://www.johnath.com/beep/
+pcspkd - run it
+pcspk - run it
 freq2beep & note2beep - reads from stdin
 
 - freq2beep
@@ -36,6 +32,9 @@ L is digit/letter - length: L=0-9,A-Z <=> 1/(L+1)
 
 /--------------\
 | Requirements |
+
+Of course PC Speaker ;-) and PC Speaker support (in linux kernel 2.6:
+Device Drivers > Input device... > Miscellaneous... > PC Speaker support)
 
 Great Johnathan Nightingale's beep, that beeps the PC speaker with control of
 frequency, duration, repetitions, etc. (http://www.johnath.com/beep/)
@@ -56,3 +55,8 @@ See INSTALL file.
 | ChangeLog |
 
 See ChangeLog file.
+
+/-------\
+| To do |
+
+See TODO file.

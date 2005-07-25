@@ -1,17 +1,22 @@
-Set ip, port in Makefile for pc-speaker server to listen on.
-There are other options you can change freely.
+If you have previous version (0.0.1), uninstall it:
 
-If you have beep from http://www.johnath.com/beep/ then set proper BEEPDIR
-and run
+ make uninstall-examples PREFIX=/if/other/than/usr/local/
 
- make
- su
- make install
+Set HOSTNAME (IP or current host name - default 127.0.0.1), PORT (default
+11111) in Makefile for PC-Speaker Server to listen on, PREFIX (default
+/usr/local) and proper BEEPDIR if you have already beep installed (from
+http://www.johnath.com/beep/). Otherwise you must download beep and install
+it, f.e. in BEEPDIR (default PREFIX/sbin) by typing
+
+ make beep-all           #caution: it won't download & install man pages, etc.
+
+Now you can run
+
+ make                    # Info:
+ su                      # make && make install <=> make all
+ make install            # make beep-all && make all <=> make world
  
-Otherwise you must download beep.c before, compile and install in BEEPDIR.
-If you don't need man pages for it etc. simplest way to do this is run
+There is also rc.pcspkd generated, which you can copy to system startup dir and
+add line to system startup file (f.e. in Slackware it is /etc/rc.d/rc.local):
 
- make beep-all
-
-There is also rc.pcspk generated, which you should add to system startup file
-(f.e. in Slackware it is /etc/rc.d/rc.local)
+ ./rc.pcspkd start

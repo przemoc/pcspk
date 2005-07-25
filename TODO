@@ -1,0 +1,4 @@
+- integrate beep functionality into pcspkd (IMPORTANT)
+- add comments to enhance readability of sources
+- add option for logging played music
+- add option for password protected playing

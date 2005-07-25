@@ -1,3 +1,0 @@
-#!/bin/sh
-
-( while true; do BEEPDIR/beep `nc -l -p PORT IP` &>/dev/null; done ) &
