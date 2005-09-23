@@ -1,4 +1,14 @@
 /-------\
+| 0.0.3 |
+
+- Johnathan Nathingale's beep functionality integrated into pcspkd
+- added configuration files support and better command-line options handling
+- removed useless freq2beep & note2beep (equivalents to pcspk & pcspk -n)
+- changed default length of beep to 200 miliseconds
+- small fixes in Makefile and default configuration moved to Makefile.cnf
+- added new example: Takako Minekawa - Fantastic Cat (beginning) ;-)
+
+/-------\
 | 0.0.2 |
 
 - netcat replaced by daemon pcspkd - PC-Speaker Server

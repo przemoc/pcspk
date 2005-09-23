@@ -1,0 +1,19 @@
+# defaults
+HOST=127.0.0.1
+PORT=11111
+
+# dirs
+PREFIX=/usr/local
+ETCDIR=${PREFIX}/etc
+BINDIR=${PREFIX}/bin
+SBINDIR=${PREFIX}/sbin
+
+# cmds
+CC=gcc
+CP=cp
+RM=rm
+SED=sed
+CHM=chmod
+GET=wget
+MKD=mkdir -p
+ECHO=echo -e

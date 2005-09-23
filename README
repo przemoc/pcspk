@@ -1,6 +1,6 @@
 /-----------------------------------------------------------------------------\
 | PCSpk - PC-Speaker Server & Client                                          |
-|  version: 0.0.2                                                             |
+|  version: 0.0.3                                                             |
 \-----------------------by Przemys³aw 'Przemoc' Pawe³czyk <przemoc@gmail.com>-/
 
 /-------------\
@@ -13,17 +13,15 @@ beep (http://www.johnath.com/beep/).
 /---------------\
 | Documentation |
 
-beep - go to http://www.johnath.com/beep/
-pcspkd - run it
-pcspk - run it
-freq2beep & note2beep - reads from stdin
+pcspkd - run it with --help option
+pcspk - run it with --help option, reads from stdin
 
-- freq2beep
+ without -n | --note option
 space seperated values f[:l], where:
 f is integer - frequency (in Hz)
-l is integer - length (in ms), default: 100
+l is integer - length (in ms), default: 200
 
-- note2beep
+ with -n | --note option
 first 3-digit number is integer - tempo (bpm)
 next are space seperated values TOL, where:
 T is letter - tone: C,d(des),D,e(es),E,F,g(ges),G,a(as),A,B,H,P(pause)
@@ -34,14 +32,15 @@ L is digit/letter - length: L=0-9,A-Z <=> 1/(L+1)
 | Requirements |
 
 Of course PC Speaker ;-) and PC Speaker support (in linux kernel 2.6:
-Device Drivers > Input device... > Miscellaneous... > PC Speaker support)
-
-Great Johnathan Nightingale's beep, that beeps the PC speaker with control of
-frequency, duration, repetitions, etc. (http://www.johnath.com/beep/)
+Device Drivers > Input device... > Miscellaneous... > PC Speaker support).
+If you want to run pcspkd by non-root user you can do it only from tty
+and must have /proc file system support (in lk 2.6: File... > Pseudo... >
+/proc file system support, in lk 2.4: File... > /proc file system support).
 
 /-------------------\
 | Examples of usage |
 
+fcat - Takako Minekawa - Fantastic Cat (beginning)
 fuga - J.S.Bach fugue in D minor (fragment)
 fuga2 - J.S.Bach fugue in D minor (longer fragment)
 cosmic - wtf? ;-)

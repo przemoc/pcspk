@@ -1,5 +1,0 @@
-#!/bin/sh
-
-# Copyright (C) 2005 Przemoc <przemoc@gmail.com>
-
-PREFIX/bin/pcspk 1 HOSTNAME PORT

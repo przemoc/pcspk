@@ -1,71 +1,57 @@
-HOSTNAME=127.0.0.1
-PORT=11111
-PREFIX=/usr/local
-BEEPDIR=${PREFIX}/sbin
+include Makefile.cnf
 
-CC=gcc
-CP=cp
-RM=rm
-SED=sed
-CHMOD=chmod
-GET=wget
+PCSPK-DIR=${ETCDIR}/pcspk
+PCSPK-CNF=${PCSPK-DIR}/pcspk.conf
+PCSPKD-CNF=${PCSPK-DIR}/pcspkd.conf
 
 default : compile
-beep-all : beep-download beep beep-install
-beep-remove : beep-clean beep-delete
 install : install-core install-examples
 all : compile install
-world : beep-all all
 uninstall : uninstall-core uninstall-examples
 
-beep-download :
-	${GET} http://www.johnath.com/beep/beep.c
-
-beep-delete : 
-	${RM} beep.c
-
-beep :
-	${CC} ${CFLAGS} beep.c -o beep
-
-beep-clean : 
-	${RM} beep
-
-beep-install :
-	${CP} beep ${BEEPDIR}/
-
-beep-uninstall :
-	${RM} ${BEEPDIR}/beep
-
 compile :
-	${CC} ${CFLAGS} pcspkd.c -o pcspkd
-	${CC} ${CFLAGS} pcspk.c -o pcspk -lm 
-	${SED} "s|PREFIX|${PREFIX}|;s|HOSTNAME|${HOSTNAME}|;s|PORT|${PORT}|" rc.pcspkd.template > rc.pcspkd
-	${SED} "s|PREFIX|${PREFIX}|;s|HOSTNAME|${HOSTNAME}|;s|PORT|${PORT}|" freq2beep.template > freq2beep
-	${SED} "s|PREFIX|${PREFIX}|;s|HOSTNAME|${HOSTNAME}|;s|PORT|${PORT}|" note2beep.template > note2beep
-	${CHMOD} 700 rc.pcspkd
-	${CHMOD} 755 freq2beep note2beep
+	${CC} ${CFLAGS} -DFILECONF=\""${PCSPKD-CNF}\"" -DHOST=\""${HOST}\"" -DPORT=${PORT} error.c opts.c pcspkd.c -o pcspkd
+	${CC} ${CFLAGS} -DFILECONF=\""${PCSPK-CNF}\"" -DHOST=\""${HOST}\"" -DPORT=${PORT} error.c opts.c pcspk.c -lm -o pcspk
+	${SED} "s|SBINDIR|${SBINDIR}|" rc.pcspkd.template > rc.pcspkd
+	${CHM} 700 rc.pcspkd
 
 clean : 
-	${RM} pcspkd pcspk rc.pcspkd freq2beep note2beep
+	${RM} pcspkd pcspk
 
 install-core : 
-	${CP} pcspkd ${PREFIX}/sbin/
-	${CP} pcspk ${PREFIX}/bin/
+	${CP} pcspkd ${SBINDIR}/
+	${CP} pcspk ${BINDIR}/
 
 install-examples : 
-	${CP} freq2beep ${PREFIX}/bin/
-	${CP} note2beep ${PREFIX}/bin/
-	${CP} fuga ${PREFIX}/bin/
-	${CP} fuga2 ${PREFIX}/bin/
-	${CP} cosmic ${PREFIX}/bin/
+	${CP} fcat ${BINDIR}/
+	${CP} fuga ${BINDIR}/
+	${CP} fuga2 ${BINDIR}/
+	${CP} cosmic ${BINDIR}/
+
+install-configs :
+	${MKD} ${PCSPK-DIR}
+	${ECHO} "host = ${HOST}\nport = ${PORT}" > ${PCSPKD-CNF}
+	${CHM} 600 ${PCSPKD-CNF}
+	${ECHO} "host = ${HOST}\nport = ${PORT}" > ${PCSPK-CNF}
+	${CHM} 644 ${PCSPK-CNF}
 
 uninstall-core :
-	${RM} ${PREFIX}/sbin/pcspkd
-	${RM} ${PREFIX}/bin/pcspkd
+	${RM} ${SBINDIR}/pcspkd
+	${RM} ${BINDIR}/pcspk
 
 uninstall-examples :
+	${RM} ${BINDIR}/fcat
+	${RM} ${BINDIR}/fuga
+	${RM} ${BINDIR}/fuga2
+	${RM} ${BINDIR}/cosmic
+
+uninstall-old-examples :
 	${RM} ${PREFIX}/bin/freq2beep
 	${RM} ${PREFIX}/bin/note2beep
 	${RM} ${PREFIX}/bin/fuga
 	${RM} ${PREFIX}/bin/fuga2
 	${RM} ${PREFIX}/bin/cosmic
+
+uninstall-configs :
+	${RM} ${PCSPK-CNF}
+	${RM} ${PCSPKD-CNF}

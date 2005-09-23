@@ -1,8 +1,22 @@
 #!/bin/sh
 
-# Example of how to use freq2beep
-# Copyright (C) 2005 Przemoc <przemoc@gmail.com>
+#  (C) Copyright 2005 Przemysaw Paweczyk <przemoc@gmail.com>
+#
+#  This program is free software; you can redistribute it and/or modify
+#  it under the terms of the GNU General Public License Version 2 as
+#  published by the Free Software Foundation.
+#
+#  This program is distributed in the hope that it will be useful,
+#  but WITHOUT ANY WARRANTY; without even the implied warranty of
+#  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+#  GNU General Public License for more details.
+#
+#  You should have received a copy of the GNU General Public License
+#  along with this program; if not, write to the Free Software
+#  Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
+#
+# Example of how to use pcspk without option -n | --note
 
-MELODY="300:50 300:50 350:60 200:60 400:70 100:70 450:80 200:80 500:90 300:90 550 400 600:110 700 500 800 400 950 1000:150"
+MELODY="300:50 300:50 350:60 200:60 400:70 100:70 450:80 200:80 500:90 300:90 550:100 400:100 600:110 700:100 500:100 800:100 400:100 950:100 1000:150"
 
-echo "$MELODY" | freq2beep
+echo "$MELODY" | pcspk

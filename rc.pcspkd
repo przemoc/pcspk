@@ -3,7 +3,7 @@
 # Copyright (C) 2005 Przemoc <przemoc@gmail.com>
 
 pcspkd_start() {
-    SBINDIR/pcspkd
+    /usr/local/sbin/pcspkd
 }
 
 pcspkd_stop() {
