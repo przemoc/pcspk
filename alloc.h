@@ -15,20 +15,13 @@
  *  Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
  */
 
-/* error.c */
+/* alloc.h */
 
-#include<stdio.h>
-#include<stdlib.h>
-#include<unistd.h>
+#ifndef	_ALLOC_H
+#define _ALLOC_H
 
-void error(const char *msg) {
-	fprintf(stderr, msg);
-	exit(EXIT_FAILURE);
-}
+void *alloc(size_t size);
+void *alloc0(size_t size);
+void *ralloc(void *ptr, size_t size);
 
-void errorp(const char *msg, int *sockfd) {
-	perror(msg);
-	if(sockfd != NULL && *sockfd > 0)
-		close(*sockfd);
-	exit(EXIT_FAILURE);
-}
+#endif

@@ -1,4 +1,15 @@
 /-------\
+| 0.0.4 |
+
+- added DragonFly/FreeBSD/NetBSD/OpenBSD support (w/o installation)
+- better Makefile (clean-ups & installation target for Slackware)
+- fixed warnings for multi-character character constants
+- partially clean-uped code
+- compile-time configuration moved to two files: config.h, Makefile.cnf
+- added Siemens ringtone converter (needs gawk)
+- added new example for Siemens converter: Harold Faltermeyer - Axel F (theme)
+
+/-------\
 | 0.0.3 |
 
 - Johnathan Nathingale's beep functionality integrated into pcspkd

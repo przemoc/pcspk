@@ -1,19 +1,18 @@
-# defaults
-HOST=127.0.0.1
-PORT=11111
-
 # dirs
 PREFIX=/usr/local
-ETCDIR=${PREFIX}/etc
-BINDIR=${PREFIX}/bin
-SBINDIR=${PREFIX}/sbin
+ETCDIR=$(PREFIX)/etc
+BINDIR=$(PREFIX)/bin
+SBINDIR=$(PREFIX)/sbin
 
 # cmds
 CC=gcc
 CP=cp
-RM=rm
+RM=rm -f
+LN=ln
+CD=cd
 SED=sed
 CHM=chmod
 GET=wget
 MKD=mkdir -p
 ECHO=echo -e
+INSTALL=install

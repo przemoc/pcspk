@@ -1,5 +1,5 @@
 /*
- *  (C) Copyright 2005 Przemys³aw Pawe³czyk <przemoc@gmail.com>
+ *  (C) Copyright 2005-7 Przemys³aw Pawe³czyk <przemoc@gmail.com>
  *
  *  This program is free software; you can redistribute it and/or modify
  *  it under the terms of the GNU General Public License Version 2 as
@@ -15,7 +15,7 @@
  *  Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
  */
 
-/* error.h - part of pcspk 0.0.3 */
+/* error.h */
 
 void error(const char *);
 void errorp(const char *, int *);

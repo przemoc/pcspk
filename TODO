@@ -1,4 +1,8 @@
-+ integrate beep functionality into pcspkd (IMPORTANT)
-- add comments to enhance readability of sources
-- add option for logging played music
-- add option for password protected playing
+- comments to enhance readability of sources
+- file reading in pcspk (-f option)
+- more converters/formats hadled by pcspk
+- option for logging played music
+- option for password protected playing
+- installation support for linux distributions other than Slackware
+- support for other platforms
+- tokenization of pcspk input

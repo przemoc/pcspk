@@ -1,14 +1,14 @@
 /-----------------------------------------------------------------------------\
 | PCSpk - PC-Speaker Server & Client                                          |
-|  version: 0.0.3                                                             |
+|  version: 0.0.4                                                             |
 \-----------------------by Przemys³aw 'Przemoc' Pawe³czyk <przemoc@gmail.com>-/
 
 /-------------\
 | Description |
 
 PCSpk is a set of command line applications for playing simple sounds and
-melodies using the PC speaker. It is based on great Johnathan Nightingale's
-beep (http://www.johnath.com/beep/).
+melodies using the PC speaker. It is inspired by simple, but really great
+Johnathan Nightingale's beep (http://www.johnath.com/beep/).
 
 /---------------\
 | Documentation |

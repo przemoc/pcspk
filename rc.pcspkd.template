@@ -1,6 +1,6 @@
 #!/bin/sh
 
-# Copyright (C) 2005 Przemoc <przemoc@gmail.com>
+# Copyright (C) 2005-7 Przemoc <przemoc@gmail.com>
 
 pcspkd_start() {
     SBINDIR/pcspkd
