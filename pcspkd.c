@@ -1,5 +1,5 @@
 /*
- *  (C) Copyright 2005-7 Przemys³aw Pawe³czyk <przemoc@gmail.com>
+ *  (C) Copyright 2005-8 Przemys³aw Pawe³czyk <przemoc@gmail.com>
  *
  *  This program is free software; you can redistribute it and/or modify
  *  it under the terms of the GNU General Public License Version 2 as
@@ -15,7 +15,20 @@
  *  Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
  */
 
-/* PCSpk - PC-Speaker Server - version 0.0.4 */
+/**
+	PCSpk - PC-Speaker Server
+	@version	0.0.5
+	@file
+
+	This source code contains fragments inspired by
+	http://johnath.com/beep/beep.c (beep-1.2.2)
+	
+	@todo
+		- Add support for more platforms and OSs
+		- Add option for logging played music
+*/
+
+#define _BSD_SOURCE
 
 #include<fcntl.h>
 #include<netdb.h>
@@ -37,67 +50,66 @@
 #	define	__bsd__	1
 #elif defined(__NetBSD__) || defined(__OpenBSD__)
 #	include<dev/wscons/wsdisplay_usl_io.h>
-#	define	NOKIOCSOUND	1
 #	define	__bsd__	1
 #endif
 
 #include"config.h"
-#include"error.h"
-#include"popts.h"
-#include"str.h"
+#include"pbase/error.h"
+#include"popts/popts.h"
+#include"pbase/str.h"
 
-#define SIZE	65535
+#define	DEFAULT_FREE_LENGTH	1000
 
-/* --- begin of modified fragments from 
-   http://johnath.com/beep/beep.c (beep-1.2.2) */
-
+/** Intel 8254's cycles per second */
 #ifndef CLOCK_TICK_RATE
-#define CLOCK_TICK_RATE 1193180
+#define	CLOCK_TICK_RATE	1193182
 #endif
 
-/* Momma taught me never to use globals, but we need something the signal
-   handlers can get at.*/
+/** Console file descriptor kept for gracefully quiting */
 int console_fd = -1;
 
-/* If we get interrupted, it would be nice to not leave the speaker beeping in
-   perpetuity. */
-void handle_signal(int signum) {
+/** Signal handler for turning off the speaker on interrupts */
+void handle_signal(int signum)
+{
 	switch(signum) {
 	case SIGINT:
 	case SIGTERM:
-		if(console_fd >= 0) {
-			/* Kill the sound, quit gracefully */
-#ifndef NOKIOCSOUND
-			ioctl(console_fd, KIOCSOUND, 0);	/* not needed now */
-#endif
+		if (console_fd >= 0) {
+			ioctl(console_fd, KDMKTONE, 0);
 			close(console_fd);
 			exit(signum);
 		} else {
-			/* Just quit gracefully */
 			exit(signum);
 		}
 	}
 }
 
-inline void play_beep(unsigned short freq, unsigned short length) {
-	/* KIOCSOUND changed to KDMKTONE, because it's safer (time-out)
-	   and works in *BSD in the same way as in Linux  -- przemoc */
-	if(freq)
-		if(ioctl(
-			console_fd, 
-			KDMKTONE, 
-			CLOCK_TICK_RATE / freq + (length << 16)
-		) < 0)
-			errorp("ioctl", &console_fd);
-	/* Look ma, I'm not ansi C compatible! */
-	usleep(1000 * length);             /* wait...	*/
+/** Plays beep and sleeps while playing */
+inline void play_beep(unsigned short freq, unsigned short length)
+{
+	if (ioctl(
+		console_fd, 
+		KDMKTONE, 
+		freq ? CLOCK_TICK_RATE / freq + (length << 16) : 0
+	) < 0)
+		errorp("ioctl");
+	usleep(1000 * length);
 }
 
-/* --- end of fragments */
+/** Plays beep without sleeping */
+inline void play_beep_nosleep(unsigned short freq)
+{
+	if (ioctl(
+		console_fd, 
+		KDMKTONE, 
+		freq ? CLOCK_TICK_RATE / freq + (DEFAULT_FREE_LENGTH << 16) : 0
+	) < 0)
+		errorp("ioctl");
+}
 
-int main(int argc, char* argv[]) {
-	char host[MAXHOSTNAMELEN] = {HOST}, fileconf[] = {FILECONF}, 
-		localconf[PATH_MAX];
+int main(int argc, char* argv[])
+{
+	char host[MAXHOSTNAMELEN] = {HOST}, fileconf[] = {FILECONF};
 	unsigned short port = PORT, help = 0;
 	struct stat st;
 	option_item_t opt[3] = {
@@ -109,21 +121,23 @@ int main(int argc, char* argv[]) {
 	int s, t;
 	struct sockaddr_in sa;
 	struct hostent *he;
-	unsigned short l, buf[2];
-#ifdef __linux__	
+	unsigned short buf[2];
+#ifdef __linux__
 	char con0[] = "/dev/console";
 	char con1[] = "/proc/self/fd/0";
-	char *con = (geteuid())?con1:con0;
+	char *con = geteuid() ? con1 : con0;
 #endif
 #ifdef __bsd__
 	char con[] = "/dev/console";
 #endif
+#ifndef DEBUG
 	pid_t pid;
+#endif /* DEBUG */
 
-	if(!stat(fileconf, &st))
-		get_options_from_file(fileconf, &opts, 0);	
-	get_options_from_arg(argc, argv, &opts);	
-	if(help || port == 0 || host[0] == 0) {
+	if (!stat(fileconf, &st))
+		get_options_from_file(fileconf, &opts, 0);
+	get_options_from_arg(argc, argv, &opts);
+	if (help || port == 0 || host[0] == 0) {
 		printf(
 "Usage: pcspkd [OPTIONS]\n\
 Starts PC-Speaker Server listening on HOSTNAME:PORT.\n\
@@ -138,38 +152,48 @@ Be sure to include the word ``pcspk'' somewhere in the ``Subject:'' field.\n",
 		host, port);
 		exit(EXIT_SUCCESS);
 	}
-	if((he = gethostbyname(host)) == NULL) 
+	if ((he = gethostbyname(host)) == NULL) 
 		error(str_nohost);
-	bzero(&sa, sizeof(struct sockaddr_in));
-	bcopy(he->h_addr, &sa.sin_addr, he->h_length);
+	if ((console_fd = open(con, O_WRONLY)) == -1)
+		errorp(str_noconsolewriting);
+	play_beep(0, 0);
+	close(console_fd);
+	memset(&sa, 0, sizeof(struct sockaddr_in));
+	memcpy(&sa.sin_addr, he->h_addr, he->h_length);
 	sa.sin_family = he->h_addrtype;
 	sa.sin_port = htons(port);
-	if((s = socket(PF_INET, SOCK_STREAM, 0)) == -1)
-		errorp(str_nosocket, NULL);
-	if(bind(s, (struct sockaddr*) &sa, sizeof(struct sockaddr)) == -1)
-		errorp(str_nosocketbind, &s);
+	if ((s = socket(PF_INET, SOCK_STREAM, 0)) == -1)
+		errorp(str_nosocket);
+	if (bind(s, (struct sockaddr*) &sa, sizeof(struct sockaddr)) == -1)
+		errorp(str_nosocketbind);
 	listen(s, 1);
-	if((pid = fork()) == -1)
-		errorp(str_noprocess, &s);
-	else if(pid > 0) {
+#ifndef DEBUG
+	if ((pid = fork()) == -1)
+		errorp(str_noprocess);
+	else if (pid > 0) {
 		close(s);
 		exit(EXIT_SUCCESS);
 	}
 	umask(0);
+	if (chdir("/") == -1)
+		errorp(str_nocdroot);
+#endif /* DEBUG */
 	signal(SIGINT, handle_signal);
 	signal(SIGTERM, handle_signal);
-	if(chdir("/") == -1)
-		errorp(str_nocdroot, &s);
-	while((t = accept(s, NULL, NULL)) != -1) {
-		read(t, buf, 2);
-		if(buf[0] == HEAD) {
-			if((console_fd = open(con, O_WRONLY)) == -1)
-				errorp(str_noconsolewriting, &s);
-			while(read(t, buf, 4) == 4)
-				play_beep(buf[0], buf[1]);
+	while ((t = accept(s, NULL, NULL)) != -1) {
+		read(t, buf, 4);
+		if (buf[0] == HEAD) {
+			if ((console_fd = open(con, O_WRONLY)) == -1)
+				errorp(str_noconsolewriting);
+			if (!buf[1])	/* PCSpk Protocol 0 - sleep mode */
+				while (read(t, buf, 4) == 4)
+					play_beep(buf[0], buf[1]);
+			else	/* PCSpk Protocol 1 - interactive mode */
+				while (read(t, buf, 2) == 2) 
+					play_beep_nosleep(buf[0]);
 			close(console_fd);
 		}
 		close(t);
 	}
-	errorp(str_nosocketaccept, &s);
+	errorp(str_nosocketaccept);
 }

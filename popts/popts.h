@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2005-7 Przemys³aw Pawe³czyk <przemoc@gmail.com>
+ * Copyright (C) 2005-8 Przemys³aw Pawe³czyk <przemoc@gmail.com>
  * All rights reserved.
  *
  * Redistribution and use in source and binary forms, with or without
@@ -32,20 +32,25 @@
  * OF THE POSSIBILITY OF SUCH DAMAGE.
  */
  
-/* popts - PP's Options Reader - version 0.3 */
+/* popts - PP's Options Reader - version 0.5 */
 
-#define OPT_BOOL	0x00
+#ifndef POPTS_H_
+#define POPTS_H_
+
+#define	OPT_BOOL	0x00
 #define	OPT_SHORT	0x01
 #define	OPT_SHORTU	0x02
-#define OPT_LONG	0x04
-#define OPT_LONGU	0x08
+#define	OPT_LONG	0x04
+#define	OPT_LONGU	0x08
 #define	OPT_FLOAT	0x10
-#define OPT_DOUBLE	0x20
-#define OPT_LDOUBLE	0x40
-#define OPT_CHAR	0x80
+#define	OPT_DOUBLE	0x20
+#define	OPT_LDOUBLE	0x40
+#define	OPT_CHAR	0x80
 
-#define OPT_AUTO_ALLOC	0
+#define	OPT_AUTO_ALLOC	0
 #define	OPT_ALLOCATED	1
+
+#define	OPT_BUF_SIZE	1024
 
 /// Universal pointer
 
@@ -69,6 +74,7 @@ typedef struct {
 	char *name;
 	char shortname;
 	uptr_t ptr;
+	char *desc;
 } option_item_t;
 
 /// List of option items
@@ -83,3 +89,6 @@ void alloc_options(options_list_t *);
 void free_options(options_list_t *);
 int get_options_from_arg(int, char **, options_list_t *);
 int get_options_from_file(char *, options_list_t *, char);
+void print_options_description(options_list_t *);
+
+#endif /* POPTS_H_ */

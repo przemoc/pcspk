@@ -1,5 +1,5 @@
 /*
- *  (C) Copyright 2005-7 Przemys³aw Pawe³czyk <przemoc@gmail.com>
+ *  (C) Copyright 2005-8 Przemys³aw Pawe³czyk <przemoc@gmail.com>
  *
  *  This program is free software; you can redistribute it and/or modify
  *  it under the terms of the GNU General Public License Version 2 as
@@ -15,33 +15,45 @@
  *  Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
  */
 
-/* alloc.c */
+/**
+	\file
+	\brief	Allocation-related functions
+**/
 
 #include<stdlib.h>
 #include<stdio.h>
 #include"str.h"
 
-void *alloc(size_t size) {
+/// Allocates dynamic memory
+
+void *alloc(size_t size)
+{
 	void *ptr;
-	if((ptr = malloc(size)) == NULL) {
+	if ((ptr = malloc(size)) == NULL) {
 		fprintf(stderr, str_nomem);
 		exit(EXIT_FAILURE);
 	}
 	return ptr;
 }
 
-void *alloc0(size_t size) {
+/// Allocates dynamic memory and fills it with zeros
+
+void *alloc0(size_t size)
+{
 	void *ptr;
-	if((ptr = calloc(1, size)) == NULL) {
+	if ((ptr = calloc(1, size)) == NULL) {
 		fprintf(stderr, str_nomem);
 		exit(EXIT_FAILURE);
 	}
 	return ptr;
 }
 
-void *ralloc(void *ptr, size_t size) {
+/// Changes size of memory block
+
+void *ralloc(void *ptr, size_t size)
+{
 	void *nptr;
-	if((nptr = realloc(ptr, size)) == NULL) {
+	if ((nptr = realloc(ptr, size)) == NULL) {
 		fprintf(stderr, str_nomem);
 		exit(EXIT_FAILURE);
 	}

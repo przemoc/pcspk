@@ -1,5 +1,5 @@
 /*
- *  (C) Copyright 2005-7 Przemys³aw Pawe³czyk <przemoc@gmail.com>
+ *  (C) Copyright 2005-8 Przemys³aw Pawe³czyk <przemoc@gmail.com>
  *
  *  This program is free software; you can redistribute it and/or modify
  *  it under the terms of the GNU General Public License Version 2 as
@@ -15,13 +15,26 @@
  *  Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
  */
 
-/* alloc.h */
+/**
+	Error-handling functions
+	@file
+**/
 
-#ifndef	_ALLOC_H
-#define _ALLOC_H
+#include<stdio.h>
+#include<stdlib.h>
+#include<unistd.h>
 
-void *alloc(size_t size);
-void *alloc0(size_t size);
-void *ralloc(void *ptr, size_t size);
+/** Prints a message to stderr and exits */
+void error(const char *msg)
+{
+	fputs(msg, stderr);
+	fputc('\n', stderr);
+	exit(EXIT_FAILURE);
+}
 
-#endif
+/** Prints a system error message to stderr and exits */
+void errorp(const char *msg)
+{
+	perror(msg);
+	exit(EXIT_FAILURE);
+}

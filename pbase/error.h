@@ -1,5 +1,5 @@
 /*
- *  (C) Copyright 2005-7 Przemys³aw Pawe³czyk <przemoc@gmail.com>
+ *  (C) Copyright 2005-8 Przemys³aw Pawe³czyk <przemoc@gmail.com>
  *
  *  This program is free software; you can redistribute it and/or modify
  *  it under the terms of the GNU General Public License Version 2 as
@@ -15,20 +15,12 @@
  *  Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
  */
 
-/* error.c */
+/* error.h */
 
-#include<stdio.h>
-#include<stdlib.h>
-#include<unistd.h>
+#ifndef ERROR_H_
+#define ERROR_H_
 
-void error(const char *msg) {
-	fprintf(stderr, msg);
-	exit(EXIT_FAILURE);
-}
+void error(const char *);
+void errorp(const char *);
 
-void errorp(const char *msg, int *sockfd) {
-	perror(msg);
-	if(sockfd != NULL && *sockfd > 0)
-		close(*sockfd);
-	exit(EXIT_FAILURE);
-}
+#endif /* ERROR_H_ */

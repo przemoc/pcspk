@@ -1,6 +1,6 @@
 /-----------------------------------------------------------------------------\
 | PCSpk - PC-Speaker Server & Client                                          |
-|  version: 0.0.4                                                             |
+|  version: 0.0.5                                                             |
 \-----------------------by Przemys³aw 'Przemoc' Pawe³czyk <przemoc@gmail.com>-/
 
 /-------------\
@@ -27,6 +27,13 @@ next are space seperated values TOL, where:
 T is letter - tone: C,d(des),D,e(es),E,F,g(ges),G,a(as),A,B,H,P(pause)
 O is digit - octave: 0-9
 L is digit/letter - length: L=0-9,A-Z <=> 1/(L+1)
+
+ with -k | --keyb option
+use below keys on keyboard (QWERTY layout assumed) to play:
+ s    f g  j k l    2 3  5 6 7    9 0  =
+z x  c v bn m , .  q w er t y u  i o p[ ]
+                   /
+(use shift to increase octave)
 
 /--------------\
 | Requirements |

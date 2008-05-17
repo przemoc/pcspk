@@ -1,4 +1,16 @@
 /-------\
+| 0.0.5 |
+
+- pcspkd: added startup testing
+- pcspkd: corrected CLOCK_TICK_RATE
+- pcspkd/pcspk: added free play mode (interactive playing on keyboard)
+- pcspkd/pcspk: changed "protocol" - handshake includes version setting
+- pcspkd/pcspk: partially clean-uped and commented code
+- siemens.gawk: added bpm & octave recognition from comments
+- Doxyfile: created
+- Makefile: added 'doc' target
+
+/-------\
 | 0.0.4 |
 
 - added DragonFly/FreeBSD/NetBSD/OpenBSD support (w/o installation)

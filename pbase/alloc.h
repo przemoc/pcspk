@@ -1,5 +1,5 @@
 /*
- *  (C) Copyright 2005-7 Przemys³aw Pawe³czyk <przemoc@gmail.com>
+ *  (C) Copyright 2005-8 Przemys³aw Pawe³czyk <przemoc@gmail.com>
  *
  *  This program is free software; you can redistribute it and/or modify
  *  it under the terms of the GNU General Public License Version 2 as
@@ -15,7 +15,13 @@
  *  Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
  */
 
-/* error.h */
+/* alloc.h */
 
-void error(const char *);
-void errorp(const char *, int *);
+#ifndef ALLOC_H_
+#define ALLOC_H_
+
+void *alloc(size_t size);
+void *alloc0(size_t size);
+void *ralloc(void *ptr, size_t size);
+
+#endif /* ALLOC_H_ */

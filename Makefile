@@ -1,9 +1,12 @@
 include Makefile.cnf
 
-OBJS = alloc.o error.o popts.o str_en.o
+OBJS = pbase/pbase.o popts/popts.o str_en.o
 MODS = pcspk pcspkd
 EPLS = fcat fuga fuga2 cosmic siemens.gawk
-LIBS = -lm
+LIBS = -lm -lcurses
+DIRS = -std=c99
+
+CFLAGS += -Wall
 
 CONF = $(ETCDIR)/pcspk.conf
 
@@ -17,14 +20,31 @@ uninstall : uninstall-core uninstall-examples
 %.o : %.c
 	$(CC) $(CFLAGS) $(SETTINGS) -c -o $@ $<
 
+str_en.o : pbase/str_en.c str_config.h
+	$(CC) $(CFLAGS) -c -o $@ $< -include str_config.h
+
+pbase/pbase.o:
+	cd pbase && make
+
+popts/popts.o:
+	cd popts && make
+
+doc : popts/*.c pbase/*.c $(MODS:=.c) config.h str_config.h
+	doxygen
+	$(TCH) doc/
+
 pcspk :	$(OBJS) config.h pcspk.c 
-	$(CC) $(CFLAGS) $(SETTINGS) $(OBJS) $(LIBS) $(LDFLAGS) $@.c -o $@
+	$(CC) $(CFLAGS) $(SETTINGS) $(OBJS) $(DIRS) $(LIBS) $(LDFLAGS) $@.c -o $@
 
 pcspkd :	$(OBJS) config.h pcspkd.c 
-	$(CC) $(CFLAGS) $(SETTINGS) $(OBJS) $(LIBS) $(LDFLAGS) $@.c -o $@
+	$(CC) $(CFLAGS) $(SETTINGS) $(OBJS) $(DIRS) $(LIBS) $(LDFLAGS) $@.c -o $@
 
 clean : 
-	$(RM) rc.pcspkd init.pcspk $(OBJS) $(MODS:=.o) pcspkd pcspk
+	$(RM) rc.pcspkd init.pcspk $(OBJS) $(MODS:=.o) $(MODS) doc/
+
+distclean: clean
+	cd pbase && make clean
+	cd popts && make clean
 
 install-core : $(MODS)
 	$(INSTALL) -c -o root -g root -m 755 pcspkd $(SBINDIR)

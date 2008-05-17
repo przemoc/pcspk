@@ -7,12 +7,13 @@ SBINDIR=$(PREFIX)/sbin
 # cmds
 CC=gcc
 CP=cp
-RM=rm -f
+RM=rm -fr
 LN=ln
 CD=cd
 SED=sed
 CHM=chmod
 GET=wget
 MKD=mkdir -p
+TCH=touch
 ECHO=echo -e
 INSTALL=install

@@ -1,7 +1,7 @@
-#ifndef _STR_H
-#define _STR_H
+#ifndef STR_H_
+#define STR_H_
 
-#define str(name)	extern char *str_##name
+#define	str(name)	extern char *str_##name
 
 str(nocdroot);
 str(noconnect);
@@ -13,6 +13,6 @@ str(nosocket);
 str(nosocketaccept);
 str(nosocketbind);
 
-#undef str
+#undef	str
 
-#endif
+#endif /* STR_H_ */

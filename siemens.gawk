@@ -1,8 +1,8 @@
 #!/usr/bin/gawk -f
 
-#  (C) Copyright 2007 Przemys³aw Pawe³czyk <przemoc@gmail.com>
+#  (C) Copyright 2007-8 Przemys³aw Pawe³czyk <przemoc@gmail.com>
 #
-# Siemens ringtone converter  v. 0.1
+# Siemens ringtone converter  v. 0.2
 #
 # Usage:
 # siemens.gawk [-v bpm=XXX] [-v oct=Y] siemens_ringtone_file | pcspk -n
@@ -12,14 +12,21 @@ BEGIN {
 	OCT = 2;	# default octave shift
 
 	_ord_init();
-	if (!(bpm > 0))
-		bpm = BPM;
-	if (oct == "")
-		oct = OCT;
 	is = "CDFGA";
 	es = "degaB";
 	ORS = " ";
-	printf "%03d%s", bpm, ORS;
+}
+
+/^#.*bpm=([0-9]+)/ {
+	match($0, /bpm=([0-9]+)/, b);
+  if ((b[1] > 0) && !(bpm > 0))
+	  bpm = b[1];
+}
+
+/^#.*oct=([0-9]+)/ {
+	match($0, /oct=([0-9]+)/, b);
+  if ((b[1] > 0) && !(oct > 0))
+	  oct = b[1];
 }
 
 # _ord_init is taken from
@@ -63,5 +70,13 @@ function parse(input) {
 }
 
 /^[^#]/ {
+	if (!(notfirst)) {
+		if (!(bpm > 0))
+			bpm = BPM;
+		if (!(oct > 0))
+			oct = OCT;
+		printf "%03d%s", bpm, ORS;
+		notfirst = 1;
+	}
 	parse($0); 
 }

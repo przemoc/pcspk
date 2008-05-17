@@ -1,0 +1,1 @@
+#define PSTR_ALLOC_MEM
