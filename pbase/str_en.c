@@ -12,16 +12,20 @@ str(noconnect, "Unable to connect");
 str(noconsolewriting, "Could not open console for writing");
 #endif
 
-#ifdef PSTR_ALLOC_MEM
-str(nomem, "Not enough memory\n");
-#endif
-
 #ifdef PSTR_GETHOSTBYNAME
 str(nohost, "Unable to get informations about host name");
 #endif
 
+#ifdef PSTR_ALLOC_MEM
+str(nomem, "Not enough memory\n");
+#endif
+
 #ifdef PSTR_FORK
 str(noprocess, "Unable to create process");
+#endif
+
+#ifdef PSTR_SETSID
+str(nosetsid, "Unable to create new session");
 #endif
 
 #ifdef PSTR_SOCKET

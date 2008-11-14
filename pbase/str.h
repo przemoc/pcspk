@@ -6,9 +6,10 @@
 str(nocdroot);
 str(noconnect);
 str(noconsolewriting);
-str(nomem);
 str(nohost);
+str(nomem);
 str(noprocess);
+str(nosetsid);
 str(nosocket);
 str(nosocketaccept);
 str(nosocketbind);

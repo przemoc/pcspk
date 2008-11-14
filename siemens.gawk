@@ -2,12 +2,27 @@
 
 #  (C) Copyright 2007-8 Przemys³aw Pawe³czyk <przemoc@gmail.com>
 #
-# Siemens ringtone converter  v. 0.2
+#  This program is free software; you can redistribute it and/or modify
+#  it under the terms of the GNU General Public License Version 2 as
+#  published by the Free Software Foundation.
+#
+#  This program is distributed in the hope that it will be useful,
+#  but WITHOUT ANY WARRANTY; without even the implied warranty of
+#  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+#  GNU General Public License for more details.
+#
+#  You should have received a copy of the GNU General Public License
+#  along with this program; if not, write to the Free Software
+#  Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
+#
+#
+# Siemens ringtone converter  v. 0.3
 #
 # Usage:
 # siemens.gawk [-v bpm=XXX] [-v oct=Y] siemens_ringtone_file | pcspk -n
 
 BEGIN {
+	IGNORECASE = 1
 	BPM = 100;	# default BPM
 	OCT = 2;	# default octave shift
 
@@ -59,6 +74,8 @@ function parse(input) {
 		match(array[i], /^([CDEFGAHBP])(is)?([0-9])?\(1\/([0-9]+)\)/, s);
 		if (s[2] != "")
 			s[1] = substr(es, index(is, s[1]), 1);
+		else
+			s[1] = toupper(s[1]);
 		s[3] += oct;
 		if (s[3] < 0)
 			s[3] = 0;

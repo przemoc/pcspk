@@ -17,7 +17,7 @@
 
 /**
 	PCSpk - PC-Speaker Client
-	@version	0.0.5
+	@version	0.0.6
 	@file
 	
 	@todo
@@ -87,7 +87,7 @@ void read_freq(unsigned short *buf, unsigned short *i)
 }
 
 /** Translates given note and octave into equivalent frequency */
-inline unsigned short note2freq(int note, int octave)
+unsigned short note2freq(int note, int octave)
 {
 	char *tmp;
 	if (!note || (tmp = strchr(notes, note)) == NULL)
@@ -219,7 +219,7 @@ Be sure to include the word ``pcspk'' somewhere in the ``Subject:'' field.\n", h
 	if ((he = gethostbyname(host)) == NULL)
 		error(str_nohost);
 	memset(&sa, 0, sizeof(struct sockaddr_in));
-	memcpy(&sa.sin_addr, he->h_addr, he->h_length);
+	memcpy(&sa.sin_addr, he->h_addr_list[0], he->h_length);
 	sa.sin_family = he->h_addrtype;
 	sa.sin_port = htons(port);
 	if ((s = socket(PF_INET, SOCK_STREAM, 0)) == -1)

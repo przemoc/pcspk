@@ -1,0 +1,150 @@
+#!/bin/sh
+
+#  (C) Copyright 2005-8 Przemys³aw Pawe³czyk <przemoc@gmail.com>
+#
+#  This program is free software; you can redistribute it and/or modify
+#  it under the terms of the GNU General Public License Version 2 as
+#  published by the Free Software Foundation.
+#
+#  This program is distributed in the hope that it will be useful,
+#  but WITHOUT ANY WARRANTY; without even the implied warranty of
+#  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+#  GNU General Public License for more details.
+#
+#  You should have received a copy of the GNU General Public License
+#  along with this program; if not, write to the Free Software
+#  Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
+#
+#
+# PCSpk examples v.6
+
+### Examples ###
+
+AXELF_INFO='Harold Faltermeyer - Axel F (theme)'
+AXELF_TYPE=2
+AXELF_CONT='# bpm=114
+F2(1/8) P(1/16) Gis2(1/8) P(1/16) F2(1/16) P(1/16) F2(1/16) Ais2(1/16) P(1/16) F2(1/16) P(1/16) Dis2(1/16) P(1/16)
+F2(1/8) P(1/16)   C3(1/8) P(1/16) F2(1/16) P(1/16) F2(1/16) Cis3(1/16) P(1/16) C3(1/16) P(1/16) Gis2(1/16) P(1/16)
+F2(1/8) C3(1/16) P(1/16) F3(1/16) P(1/16) F2(1/16) Dis2(1/16) P(1/16) Dis2(1/16) C2(1/16) P(1/16) Gis2(1/16) P(1/16) F2(1/4)'
+
+COSMIC_INFO='Cosmic sounds'
+COSMIC_TYPE=0
+COSMIC_CONT='300:50 300:50 350:60 200:60 400:70 100:70 450:80 200:80 500:90 300:90 550:100 400:100 600:110 700:100 500:100 800:100 400:100 950:100 1000:150'
+
+FCAT_INFO='Takako Minekawa - Fantastic Cat (beginning)'
+FCAT_TYPE=1
+FCAT_TEMPO=140
+FCAT_INTRO="a47 C57 e57 e57 a47 C57 e57 e57 a47 C57 e57 e57 C57 e57 F57 e57"
+FCAT_MAIN1="P07 e53 P07 e57 C57 C57 a43 P07 P03 P03 P03 P07 e57 e57 e57 e57 e57 C57 C57 a43 P03 P03 P03 P03"
+FCAT_MAIN2="P07 a53 P07 a57 F57 F57 d53 P07 P03 P03 P03 P07 e57 e57 e57 e57 e57 C57 C57 a43 P03 P03 P03 P03"
+FCAT_MAIN3="B53 P07 G53 P03 a53 e53 P07 e57 C53 a43 P07 P00"
+FCAT_CONT="$FCAT_TEMPO $FCAT_INTRO $FCAT_INTRO $FCAT_INTRO $FCAT_INTRO $FCAT_MAIN1 $FCAT_MAIN2 $FCAT_MAIN3"
+
+FUGA_INFO='J.S.Bach - Fugue in D minor (fragment)'
+FUGA_TYPE=1
+FUGA_CONT='240 A47 G47 A47 F47 A47 E47 A47 D47 A47 d47 A47 D47 A47 E47 A47 F47 A47 A37 A47 H37 A47 d47 A47 D47 A47 d47 A47 D47 A47 E47 A47 D43'
+
+FUGA2_INFO='J.S.Bach - Fugue in D minor (longer fragment)'
+FUGA2_TYPE=1
+FUGA2_CONT='240 A47 G47 A47 F47 A47 E47 A47 D47 A47 d47 A47 D47 A47 E47 A47 F47 A47 A37 A47 H37 A47 d47 A47 D47 A47 d47 A47 D47 A47 E47 A47 P47 D57 C57 D57 B47 D57 A47 D57 G47 D57 g47 D57 G47 D57 A47 D57 B47 D57 D47 D57 E47 D57 g47 D57 G47 D57 g47 D57 G47 D57 A47 D57 G43'
+
+GOODBADUGLY_INFO='Ennio Morricone - The Good, the Bad and the Ugly'
+GOODBADUGLY_TYPE=2
+GOODBADUGLY_CONT='# bpm=110
+A2(1/16) D3(1/16) A2(1/16) D3(1/16) A2(1/2) F2(1/4)
+G2(1/4) D2(1/2) P(1/4)
+A2(1/16) D3(1/16) A2(1/16) D3(1/16) A2(1/2) F2(1/4)
+G2(1/4) C3(1/2) P(1/4)
+#A2(1/16) D3(1/16) A2(1/16) D3(1/16) A2(1/2) F2(1/4)
+A2(1/16) D3(1/16) A2(1/16) D3(1/2) P(1/16) F2(1/4)
+E2(1/8) D2(1/8) C2(1/2) P(1/4)
+#A2(1/16) D3(1/16) A2(1/16) D3(1/16) A2(1/2) G2(1/8) D2(1/8)
+A2(1/16) D3(1/16) A2(1/16) D3(1/16) A2(1/2) G2(1/4)
+D2(1/1)
+P(1/1)
+A2(1/16) D3(1/16) A2(1/16) D3(1/16) A2(1/2) F2(1/4)
+G2(1/4) D2(1/2) P(1/4)
+A2(1/16) D3(1/16) A2(1/16) D3(1/16) A2(1/2) F2(1/4)
+G2(1/4) C3(1/2) P(1/4)
+#A2(1/16) D3(1/16) A2(1/16) D3(1/16) A2(1/2) F2(1/4)
+A2(1/16) D3(1/16) A2(1/16) D3(1/2) P(1/16) F2(1/4)
+E2(1/8) D2(1/8) C2(1/2) P(1/4)
+#A2(1/16) D3(1/16) A2(1/16) D3(1/16) A2(1/2) G2(1/8) D2(1/8)
+A2(1/16) D3(1/16) A2(1/16) D3(1/16) A2(1/2) G2(1/8) P(1/16) D2(1/16)
+D2(1/1)
+P(1/2) P(1/4) P(1/8) A1(1/8)
+D2(1/8) A2(1/8) F2(1/8) C3(1/1) P(1/4) P(1/8) A1(1/8)
+D2(1/8) A2(1/8) F2(1/8) C3(1/1) P(1/4) P(1/8) A1(1/8)
+D2(1/8) A2(1/8) F2(1/8) C3(1/8) A2(1/8) E3(1/4) P(1/8) C3(1/8)
+G3(1/1)
+A3(1/1)
+F3(1/16) E3(1/16) D3(1/4) P(1/8) G3(1/4) P(1/8) D3(1/8)
+F3(1/16) E3(1/16) D3(1/4) P(1/8) G3(1/4) P(1/8) D3(1/8)
+F3(1/16) E3(1/16) D3(1/8) G3(1/8) D3(1/8) F3(1/16) E3(1/16) D3(1/8) G3(1/8) D3(1/8)
+F3(1/16) E3(1/16) D3(1/16) F3(1/16) E3(1/8) C3(1/8) D3(1/16) C3(1/16) H2(1/8) C3(1/8) A2(1/8)
+H2(1/16) A2(1/16) G2(1/16) H2(1/16) A2(1/8) F2(1/8) G2(1/16) F2(1/16) E2(1/8) F2(1/8) D2(1/8)
+C2(1/1)
+Cis2(1/1)
+D2(1/4) P(1/8) D2(1/16) D2(1/16) D2(1/4) P(1/8) D2(1/16) D2(1/16)
+D2(1/2)'
+
+### Settings ###
+
+EXAMPLES=6
+EXAMPLE1=COSMIC
+EXAMPLE2=FUGA
+EXAMPLE3=FUGA2
+EXAMPLE5=FCAT
+EXAMPLE4=AXELF
+EXAMPLE6=GOODBADUGLY
+
+SIEMENS=
+
+### Code ###
+
+if which siemens.gawk >/dev/null 2>&1; then
+	SIEMENS=1
+fi
+
+if test -z "$1" || ! test "$1" -lt 0 -o "$1" -gt 0 >/dev/null 2>&1 || test "$1" -le 0 -o "$1" -gt $EXAMPLES; then
+	if seq 1 >/dev/null 2>&1; then
+		SEQ=seq
+	elif jot 1 >/dev/null 2>&1; then
+		SEQ=jot
+	else
+		echo "ERROR: You need sequence printer such as 'jot' or 'seq' for examples listing!"
+		exit 1
+	fi
+
+	echo Usage: $0 \<example number\> \[host\]
+	echo
+	echo List of available examples:
+	for I in `$SEQ $EXAMPLES`; do
+		eval ENAME=\$EXAMPLE$I
+		eval ETYPE=\$$ENAME\_TYPE
+		if test $ETYPE -eq 2 -a -z "$SIEMENS"; then
+			continue
+		fi
+		eval echo \$I. \$$ENAME\_INFO
+	done
+	exit 0
+fi
+
+eval ENAME=\$EXAMPLE$1
+eval echo \$1. \$$ENAME\_INFO
+ECONT=$ENAME\_CONT
+eval ETYPE=\$$ENAME\_TYPE
+
+if   test $ETYPE -eq 0; then
+	CMD="echo \"\$$ECONT\" | pcspk"
+elif test $ETYPE -eq 1; then
+	CMD="echo \"\$$ECONT\" | pcspk -n"
+elif test $ETYPE -eq 2; then
+	if test -z "$SIEMENS"; then
+		echo "ERROR: You need 'siemens.gawk' and 'gawk' for playing this example!"
+		exit 1
+	fi
+	CMD="echo \"\$$ECONT\" | siemens.gawk | pcspk -n"
+fi
+
+eval $CMD $2

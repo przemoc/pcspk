@@ -1,45 +1,78 @@
-/-------\
-| 0.0.5 |
+pcspk (0.0.6)
 
-- pcspkd: added startup testing
-- pcspkd: corrected CLOCK_TICK_RATE
-- pcspkd/pcspk: added free play mode (interactive playing on keyboard)
-- pcspkd/pcspk: changed "protocol" - handshake includes version setting
-- pcspkd/pcspk: partially clean-uped and commented code
-- siemens.gawk: added bpm & octave recognition from comments
-- Doxyfile: created
-- Makefile: added 'doc' target
+  * Removed problematic 'inline' keyword from functions' definitions
+    (pcspkd/pcspk)
+    - submission sent by Andreas Nordal <andreas.nordal@gmail.com>
+  * Changed h_addr reference (struct hostent) to h_addr_list[0] (pcspkd/pcspk)
+    - fix sent by Andreas Nordal <andreas.nordal@gmail.com>
+  * Added setsid() and I/O redirection in server (pcspkd)
+    - it should be there long time before, really...
+  * Replaced all examples by pcspk-examples script (pcspk-examples, Makefile)
+    - no more cluttering bin directory
+  * Fixed portability (Makefile)
+    - removed assumption that root group exists in install targets
+    - $(MAKE) instead of simple make calling is used
+    - added gawk finding and fixing shabang in siemens.gawk
+  * Made siemens.gawk case-insensitive (siemens.gawk)
+    - not all siemens ringtones are written properly
+  * Changed changelog to Debian-like format (ChangeLog)
+  * Added new example (pcspk-examples)
+    - Ennio Morricone - The Good, the Bad and the Ugly
 
-/-------\
-| 0.0.4 |
+ -- Przemys³aw Pawe³czyk <przemoc@gmail.com>  2008.11.15
 
-- added DragonFly/FreeBSD/NetBSD/OpenBSD support (w/o installation)
-- better Makefile (clean-ups & installation target for Slackware)
-- fixed warnings for multi-character character constants
-- partially clean-uped code
-- compile-time configuration moved to two files: config.h, Makefile.cnf
-- added Siemens ringtone converter (needs gawk)
-- added new example for Siemens converter: Harold Faltermeyer - Axel F (theme)
+pcspk (0.0.5)
 
-/-------\
-| 0.0.3 |
+  * Added startup testing of server (pcspkd)
+  * Corrected CLOCK_TICK_RATE value (pcspkd)
+  * Added free play mode (pcspkd/pcspk)
+    - interactive playing on keyboard now is possible
+  * Changed "protocol" (pcspkd/pcspk)
+    - handshake includes version setting
+  * Partially clean-uped and commented code (pcspkd/pcspk)
+  * Added bpm & octave recognition from comments (siemens.gawk)
+  * Created Doxyfile
+  * Added 'doc' target (Makefile)
 
-- Johnathan Nathingale's beep functionality integrated into pcspkd
-- added configuration files support and better command-line options handling
-- removed useless freq2beep & note2beep (equivalents to pcspk & pcspk -n)
-- changed default length of beep to 200 miliseconds
-- small fixes in Makefile and default configuration moved to Makefile.cnf
-- added new example: Takako Minekawa - Fantastic Cat (beginning) ;-)
+ -- Przemys³aw Pawe³czyk <przemoc@gmail.com>  2008.05.18
 
-/-------\
-| 0.0.2 |
+pcspk (0.0.4)
 
-- netcat replaced by daemon pcspkd - PC-Speaker Server
-- note2beep & freq2beep are now only front-ends to pcspk - pc-speaker client
-- cleanups & some fixes (code & Makefile)
-- added ToDo list
+  * Added DragonFly/FreeBSD/NetBSD/OpenBSD support (w/o installation)
+  * Better Makefile (clean-ups & installation target for Slackware)
+  * Fixed warnings for multi-character character constants
+  * Partially clean-uped code
+  * Moved compile-time configuration into two files: config.h, Makefile.cnf
+  * Added Siemens ringtone converter (needs gawk)
+  * Added new example for Siemens converter
+    - Harold Faltermeyer - Axel F (theme)
 
-/-------\
-| 0.0.1 |
+ -- Przemys³aw Pawe³czyk <przemoc@gmail.com>  2007.03.18
 
-- initial release
+pcspk (0.0.3)
+
+  * Johnathan Nathingale's beep functionality integrated into pcspkd
+  * Added configuration files support and better command-line options handling
+  * Removed useless freq2beep & note2beep (equivalents to pcspk & pcspk -n)
+  * Changed default length of beep to 200 miliseconds
+  * Small fixes in Makefile and default configuration moved to Makefile.cnf
+  * Added new note example
+    - Takako Minekawa - Fantastic Cat (beginning)
+
+ -- Przemys³aw Pawe³czyk <przemoc@gmail.com>  2005.09.24
+
+pcspk (0.0.2)
+
+  * Replaced netcat by daemon pcspkd - PC-Speaker Server
+  * Rewritten note2beep & freq2beep 
+    - they are only front-ends to pcspk now
+  * Cleanups & some fixes (code & Makefile)
+  * Added ToDo list
+
+ -- Przemys³aw Pawe³czyk <przemoc@gmail.com>  2005.07.26
+
+pcspk (0.0.1)
+
+  * Initial release
+
+ -- Przemys³aw Pawe³czyk <przemoc@gmail.com>  2005.07.08

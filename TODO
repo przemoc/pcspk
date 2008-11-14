@@ -1,3 +1,4 @@
+- support for multiple keyboard layouts (Andreas Nordal)
 - comments to enhance readability of sources
 - file reading in pcspk (-f option)
 - more converters/formats hadled by pcspk

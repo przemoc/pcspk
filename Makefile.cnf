@@ -16,4 +16,5 @@ GET=wget
 MKD=mkdir -p
 TCH=touch
 ECHO=echo -e
+WHICH=which
 INSTALL=install
