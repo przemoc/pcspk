@@ -1,6 +1,6 @@
 #!/usr/bin/gawk -f
 
-#  (C) Copyright 2007-8 Przemys³aw Pawe³czyk <przemoc@gmail.com>
+#  (C) Copyright 2007-8 Przemyslaw Pawelczyk <przemoc@gmail.com>
 #
 #  This program is free software; you can redistribute it and/or modify
 #  it under the terms of the GNU General Public License Version 2 as
