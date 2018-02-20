@@ -1,17 +1,13 @@
-/-----------------------------------------------------------------------------\
-| PCSpk - PC-Speaker Server & Client                                          |
-|  version: 0.0.6                                                             |
-\-----------------------by Przemysław 'Przemoc' Pawełczyk <przemoc@gmail.com>-/
-
-/-------------\
-| Description |
+PCSpk - PC-Speaker Server & Client
+==================================
 
 PCSpk is a set of command line applications for playing simple sounds and
 melodies using the PC speaker. It is inspired by simple, but really great
 Johnathan Nightingale's beep (http://www.johnath.com/beep/).
 
-/---------------\
-| Documentation |
+
+Documentation
+-------------
 
 pcspkd - run it with --help option
 pcspk - run it with --help option, reads from stdin
@@ -35,8 +31,9 @@ z x  c v bn m , .  q w er t y u  i o p[ ]
                    /
 (use shift to increase octave)
 
-/--------------\
-| Requirements |
+
+Requirements
+------------
 
 Of course PC Speaker ;-) and PC Speaker support (in linux kernel 2.6:
 Device Drivers > Input device... > Miscellaneous... > PC Speaker support).
@@ -44,25 +41,29 @@ If you want to run pcspkd by non-root user you can do it only from tty
 and must have /proc file system support (in lk 2.6: File... > Pseudo... >
 /proc file system support, in lk 2.4: File... > /proc file system support).
 
-/-------------------\
-| Examples of usage |
+
+Examples of usage
+-----------------
 
 fcat - Takako Minekawa - Fantastic Cat (beginning)
 fuga - J.S.Bach fugue in D minor (fragment)
 fuga2 - J.S.Bach fugue in D minor (longer fragment)
 cosmic - wtf? ;-)
 
-/--------------\
-| Installation |
+
+Installation
+------------
 
 See INSTALL file.
 
-/-----------\
-| ChangeLog |
+
+ChangeLog
+---------
 
 See ChangeLog file.
 
-/-------\
-| To do |
+
+To do
+-----
 
 See TODO file.
