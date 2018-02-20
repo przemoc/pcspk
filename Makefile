@@ -34,10 +34,10 @@ doc : popts/*.c pbase/*.c $(MODS:=.c) config.h str_config.h
 	$(TCH) doc/
 
 pcspk :	$(OBJS) config.h pcspk.c 
-	$(CC) $(CFLAGS) $(SETTINGS) $(OBJS) $(DIRS) $(LIBS) $(LDFLAGS) $@.c -o $@
+	$(CC) $(CFLAGS) $(SETTINGS) $(OBJS) $(DIRS) $(LDFLAGS) $@.c -o $@ $(LIBS)
 
 pcspkd : $(OBJS) config.h pcspkd.c 
-	$(CC) $(CFLAGS) $(SETTINGS) $(OBJS) $(DIRS) $(LIBS) $(LDFLAGS) $@.c -o $@
+	$(CC) $(CFLAGS) $(SETTINGS) $(OBJS) $(DIRS) $(LDFLAGS) $@.c -o $@ $(LIBS)
 
 examples :
 	if $(WHICH) gawk >/dev/null 2>&1; then $(SED) -ie "1s|.*|#!`$(WHICH) gawk` -f|" siemens.gawk; else echo 'No gawk detected!'; exit 1; fi
