@@ -27,6 +27,7 @@
 		- Tokenization of input
 **/
 
+#define _XOPEN_SOURCE 600
 #include<math.h>
 #include<netdb.h>
 #include<netinet/in.h>
