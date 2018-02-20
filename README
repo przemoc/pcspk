@@ -51,6 +51,25 @@ fuga2 - J.S.Bach fugue in D minor (longer fragment)
 cosmic - wtf? ;-)
 
 
+Download
+--------
+
+You can obtain it (tarball and signature) from:
+
+    ftp://ftp.przemoc.net/pub/software/sound/pcspk/
+    http://ftp.przemoc.net/pub/software/sound/pcspk/
+
+Signer should be the current maintainer, see AUTHORS file.
+
+Alternatively, you can get it from:
+
+    https://github.com/przemoc/pcspk/releases/
+
+If you want to see the latest source code, then git clone following URL:
+
+    https://github.com/przemoc/pcspk
+
+
 Installation
 ------------
 
@@ -67,3 +86,10 @@ To do
 -----
 
 See TODO file.
+
+
+License
+-------
+
+The project is licensed under the terms of the GNU GPL v2 only license.
+See COPYING file for the full license text.
