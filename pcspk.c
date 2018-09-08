@@ -53,7 +53,7 @@
 /** Defualt length of tone */
 #define	DEFAULT_LENGTH	200
 
-char notes[] = "CdDeEFgGaABH";
+const char NOTES[] = "CdDeEFgGaABH";
 
 /** Reads frequencies and lengths of tones from stdin */
 void read_freq(unsigned short *buf, unsigned short *i)
@@ -91,10 +91,10 @@ void read_freq(unsigned short *buf, unsigned short *i)
 unsigned short note2freq(int note, int octave)
 {
 	char *tmp;
-	if (!note || (tmp = strchr(notes, note)) == NULL)
+	if (!note || (tmp = strchr(NOTES, note)) == NULL)
 		return 0;
 	/* exp2(...) doesn't work correctly (always equal 0) so I use exp(log(2)*...) */
-	return (unsigned short) lrint((exp(log(2) * (octave + ((int)(tmp - notes + 1) - 22.0) / 12.0))) * 55.0);
+	return (unsigned short) lrint((exp(log(2) * (octave + ((int)(tmp - NOTES + 1) - 22.0) / 12.0))) * 55.0);
 }
 
 /** Reads notes from stdin */
